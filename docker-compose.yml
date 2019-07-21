@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+
+  openvpn:
+    #image: registry.git.leon.wtf/leon/docker-ovpn/ovpn:latest
+    image: ovpn
+    container_name: "openvpn"
+    ports:
+      - '1194:1194'
+    volumes:
+      - openvpn-certstore:/pki
+      - /etc/docker-openvpn/configs:/etc/openvpn
+
+  easy-rsa:
+    #image: registry.git.leon.wtf/leon/docker-ovpn/easy-rsa:latest
+    image: easy-rsa
+    container_name: "easy-rsa"
+    volumes:
+      - openvpn-certstore:/pki/to-ovpn
+
+
+volumes:
+  ovpn-certstore:
+    driver: local
