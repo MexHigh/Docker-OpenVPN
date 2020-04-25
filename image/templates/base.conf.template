@@ -1,0 +1,27 @@
+client
+dev tun
+persist-key
+;persist-tun
+
+<connection>
+  remote vpn.leon.wtf
+  port 1194
+  proto udp
+</connection>
+
+resolv-retry infinite
+nobind
+
+user nobody
+group nogroup
+
+remote-cert-tls server
+verify-x509-name "C=DE, ST=BW, L=Offenburg, CN=ovpn-server" subject
+cipher AES-256-GCM
+auth SHA512
+auth-user-pass
+auth-nocache
+
+verb 3
+;mute 20
+;mute-replay-warnings

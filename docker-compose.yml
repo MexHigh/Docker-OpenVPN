@@ -1,25 +1,19 @@
 version: '3'
-
 services:
 
   openvpn:
-    #image: registry.git.leon.wtf/leon/docker-ovpn/ovpn:latest
-    image: ovpn
-    container_name: "openvpn"
+    build: ./image
+    image: local/openvpn
+    #image: registry.git.leon.wtf/leon/docker-openvpn:latest
+    container_name: openvpn
+    restart: on-failure
     ports:
-      - '1194:1194'
+      - 1194:1194/udp
     volumes:
-      - openvpn-certstore:/pki
-      - /etc/docker-openvpn/configs:/etc/openvpn
-
-  easy-rsa:
-    #image: registry.git.leon.wtf/leon/docker-ovpn/easy-rsa:latest
-    image: easy-rsa
-    container_name: "easy-rsa"
-    volumes:
-      - openvpn-certstore:/pki/to-ovpn
-
-
-volumes:
-  ovpn-certstore:
-    driver: local
+      - /etc/openvpn:/etc/openvpn
+      - ./users.priv:/app/users:ro
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+#    command: init
