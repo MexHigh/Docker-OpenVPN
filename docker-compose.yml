@@ -11,7 +11,7 @@ services:
       - 1194:1194/udp
     volumes:
       - /etc/openvpn:/etc/openvpn
-      - ./users.priv:/app/users:ro
+      - ./users.conf:/app/users:ro
     cap_add:
       - NET_ADMIN
     devices:
