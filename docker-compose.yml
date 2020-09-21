@@ -2,9 +2,9 @@ version: '3'
 services:
 
   openvpn:
-    build: ./image
-    image: local/openvpn
-    #image: registry.git.leon.wtf/leon/docker-openvpn:latest
+    #build: ./image
+    #image: local/openvpn
+    image: registry.git.leon.wtf/leon/docker-openvpn:latest
     container_name: openvpn
     restart: on-failure
     ports:
